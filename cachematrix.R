@@ -1,26 +1,44 @@
 makeCacheMatrix <- function(x = matrix()) {
 
-        m <- NULL
+        ##mean value is set to NULL in the beginning
+        i <- NULL
+        
+        ##save matrix
         set <- function(y) {
                 x <<- y
-                m <<- NULL
+                i <<- NULL
         }
+        
+        ##load matrix
         get <- function() x
-        setmean <- function(mean) m <<- mean
-        getmean <- function() m
-        list(set = set, get = get, setmean = setmean, getmean = getmean)
+        
+        ##save inverse matrix
+        setinverse <- function(inverse) i <<- inverse
+        
+        ##load inverse matrix
+        getinverse <- function() i
+        list(set = set, get = get, setinverse = setinverse, getinverse = getinverse)
 }
 
 cacheSolve <- function(x, ...) {
         
-        m <- x$getmean()
-        if(!is.null(m)) {
+        ##start with calling inverse matrix
+        i <- x$getinverse()
+        
+        ##if i has inverse matrix, load and use it
+        if(!is.null(i)) {
                 message("getting cached data")
-                return(m)
+                return(i)
         }
+        
+        ##if i doesn't have inverse matrix, load matrix
         data <- x$get()
+        
+        ##and calculate inverse matrix
         m <- solve(data, ...)
-        x$setmean(m)
+        
+        ##store inverse matrix
+        x$setinverse(m)
         
         m
 }
