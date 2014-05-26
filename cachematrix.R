@@ -35,10 +35,10 @@ cacheSolve <- function(x, ...) {
         data <- x$get()
         
         ##and calculate inverse matrix
-        m <- solve(data, ...)
+        i <- solve(data, ...)
         
         ##store inverse matrix
-        x$setinverse(m)
+        x$setinverse(i)
         
         m
 }
