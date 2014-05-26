@@ -1,5 +1,5 @@
 makeCacheMatrix <- function(x = matrix()) {
-
+        
         ##mean value is set to NULL in the beginning
         i <- NULL
         
@@ -40,5 +40,5 @@ cacheSolve <- function(x, ...) {
         ##store inverse matrix
         x$setinverse(i)
         
-        m
+        i
 }
